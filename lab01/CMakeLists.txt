@@ -33,4 +33,4 @@ add_executable(tests test/tests01.cpp)
 target_link_libraries(tests ${CMAKE_PROJECT_NAME}_lib gtest_main)
 
 # Добавление тестов в тестовый набор
-add_test(NAME MyProjectTests COMMAND tests)
+add_test(NAME TestLab1 COMMAND tests)

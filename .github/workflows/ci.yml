@@ -1,24 +1,49 @@
-name: C/C++ CI
+name: CI for lab01
 
+# События, на которые будет триггериться сборка (push и pull request)
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  Check:
+  build:
+
+    # Платформа, на которой будет выполняться сборка
     runs-on: ubuntu-latest
 
     steps:
+      # Шаг 1: Проверка кода из репозитория
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
+      # Шаг 2: Установка CMake
+      - name: Install CMake
+        run: sudo apt-get install cmake
+
+      # Шаг 3: Установка компилятора и других инструментов
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake g++ googletest
+        run: sudo apt-get install build-essential
 
-      - name: Configure CMake
+      # Шаг 4: Установка Google Test
+      - name: Install GoogleTest dependencies
+        run: sudo apt-get install libgtest-dev
+
+      # Шаг 5: Создание и настройка сборочного каталога
+      - name: Create build directory
+        run: mkdir build
+
+      # Шаг 6: Генерация файлов с помощью CMake
+      - name: Run CMake
         run: cmake -S . -B build
 
-      - name: Build
+      # Шаг 7: Компиляция проекта
+      - name: Build project
         run: cmake --build build
 
+      # Шаг 8: Запуск тестов с помощью CTest
       - name: Run tests
-        run: ./build/labX/test_labX
+        run: cd build && ctest --output-on-failure

@@ -34,8 +34,8 @@ target_link_libraries(lab02_exe PRIVATE lab02_lib)
 # Включаем поддержку тестов
 enable_testing()
 
-# Создание тестов
-add_executable(lab02_tests test/tests01.cpp)
+# Указываем правильный путь к файлу с тестами
+add_executable(lab02_tests test/tests02.cpp)
 
 # Линковка тестов с библиотекой и Google Test
 target_link_libraries(lab02_tests lab02_lib gtest_main)

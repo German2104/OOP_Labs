@@ -1,14 +1,10 @@
-name: CI
+name: C/C++ CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
-  build:
-
+  Check:
     runs-on: ubuntu-latest
 
     steps:

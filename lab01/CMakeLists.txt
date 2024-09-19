@@ -42,3 +42,6 @@ target_link_libraries(lab01_tests lab01_lib gtest_main)
 
 # Добавление тестов в набор тестирования
 add_test(NAME TestLab1 COMMAND lab01_tests)
+
+# Добавляем тест в CTest
+add_test(NAME MyTests COMMAND runTests)

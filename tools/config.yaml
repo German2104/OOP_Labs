@@ -1,8 +1,0 @@
-
-lab_01: {
-  var_num: 20,
-  template_solution: {
-    lab_01.h: solution.h,
-    test_solution.cpp: test.cpp
-  }
-}

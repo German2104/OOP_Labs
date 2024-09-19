@@ -1,49 +1,46 @@
-name: CI for lab01
+name: C/C++ CI
 
-# События, на которые будет триггериться сборка (push и pull request)
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
-
-    # Платформа, на которой будет выполняться сборка
+  Check:
     runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Проверка кода из репозитория
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # Шаг 2: Установка CMake
-      - name: Install CMake
-        run: sudo apt-get install cmake
+      # Шаг 1: Сборка с использованием CMake
+      - name: Run cmake
+        run: |
+          mkdir build_debug
+          cd build_debug
+          cmake -DCMAKE_BUILD_TYPE=Debug ..
 
-      # Шаг 3: Установка компилятора и других инструментов
-      - name: Install dependencies
-        run: sudo apt-get install build-essential
+      # Шаг 2: Компиляция и запуск тестов
+      - name: Compile && run tests
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          EXCLUDE_PATTERNS="-e 'tools' -e 'contrib' -e 'workflow' "
+          [[ -z "${GITHUB_BASE_REF}" ]] && BRANCH_VAR=HEAD~1 || BRANCH_VAR=origin/main
+          LIST_CHECK_FILES=$(git diff --name-only ${BRANCH_VAR} | grep '\.cpp\|\.h\|\.hpp' | grep -v ${EXCLUDE_PATTERNS} | tr '\n' ' ')
+          List_run_test=()
+          cd build_debug
+          for file in ${LIST_CHECK_FILES[@]}
+          do
+            List_run_test+=($(echo $file | cut -d/ -f2)$(echo $file | cut -d/ -f4))
+          done
+          echo "${List_run_test[@]}"
+          List_run_test=$(echo ${List_run_test[@]} | tr ' ' '\n' | sort | uniq)
+          for file in ${List_run_test[@]}
+          do
+            make $file
+            chmod +x ./$file
+            ./$file
+          done
 
-      # Шаг 4: Установка Google Test
-      - name: Install GoogleTest dependencies
-        run: sudo apt-get install libgtest-dev
-
-      # Шаг 5: Создание и настройка сборочного каталога
-      - name: Create build directory
-        run: mkdir build
-
-      # Шаг 6: Генерация файлов с помощью CMake
-      - name: Run CMake
-        run: cmake -S . -B build
-
-      # Шаг 7: Компиляция проекта
-      - name: Build project
-        run: cmake --build build
-
-      # Шаг 8: Запуск тестов с помощью CTest
+      # Шаг 3: Запуск тестов с помощью CTest
       - name: Run tests
-        run: cd build && ctest --output-on-failure
+        run: |
+          cd build_debug
+          ctest --output-on-failure

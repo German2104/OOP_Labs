@@ -19,26 +19,26 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-# Добавляем библиотеку для решения (src/solution.cpp)
-add_library(${CMAKE_PROJECT_NAME}_lib src/solution.cpp)
+# Добавляем библиотеку для решения
+add_library(lab02_lib src/solution.cpp)
 
 # Включаем директорию с заголовочными файлами
-target_include_directories(${CMAKE_PROJECT_NAME}_lib PUBLIC include)
+target_include_directories(lab02_lib PUBLIC include)
 
-# Создание основного исполняемого файла (main.cpp)
-add_executable(${CMAKE_PROJECT_NAME}_exe main.cpp)
+# Создание основного исполняемого файла
+add_executable(lab02_exe main.cpp)
 
 # Линковка библиотеки с исполняемым файлом
-target_link_libraries(${CMAKE_PROJECT_NAME}_exe PRIVATE ${CMAKE_PROJECT_NAME}_lib)
+target_link_libraries(lab02_exe PRIVATE lab02_lib)
 
 # Включаем поддержку тестов
 enable_testing()
 
-# Создание тестов (test/tests01.cpp)
-add_executable(tests test/tests02.cpp)
+# Создание тестов
+add_executable(lab02_tests test/tests01.cpp)
 
 # Линковка тестов с библиотекой и Google Test
-target_link_libraries(tests ${CMAKE_PROJECT_NAME}_lib gtest_main)
+target_link_libraries(lab02_tests lab02_lib gtest_main)
 
 # Добавление тестов в набор тестирования
-add_test(NAME TestLab2 COMMAND tests)
+add_test(NAME TestLab2 COMMAND lab02_tests)

@@ -9,4 +9,12 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+build
 CMakeUserPresets.json
+./idea
+cmake-build-debug
+test_6
+test_2
+test_2_v2
+test_1_v0
+test_2_v1

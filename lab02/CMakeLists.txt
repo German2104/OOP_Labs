@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(lab01)
+project(lab02)
 
 # Установка стандарта C++
 set(CMAKE_CXX_STANDARD 20)
@@ -20,28 +20,28 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # Добавляем библиотеку для решения
-add_library(lab01_lib src/solution.cpp)
+add_library(lab02_lib src/solution.cpp)
 
 # Включаем директорию с заголовочными файлами
-target_include_directories(lab01_lib PUBLIC include)
+target_include_directories(lab02_lib PUBLIC include)
 
 # Создание основного исполняемого файла
-add_executable(lab01_exe main.cpp)
+add_executable(lab02_exe main.cpp)
 
 # Линковка библиотеки с исполняемым файлом
-target_link_libraries(lab01_exe PRIVATE lab01_lib)
+target_link_libraries(lab02_exe PRIVATE lab02_lib)
 
 # Включаем поддержку тестов
 enable_testing()
 
 # Создание тестов
-add_executable(lab01_tests test/tests01.cpp)
+add_executable(lab02_tests test/tests01.cpp)
 
 # Линковка тестов с библиотекой и Google Test
-target_link_libraries(lab01_tests lab01_lib gtest_main)
+target_link_libraries(lab02_tests lab02_lib gtest_main)
 
 # Добавление тестов в набор тестирования
-add_test(NAME TestLab1 COMMAND lab01_tests)
+add_test(NAME TestLab2 COMMAND lab02_tests)
 
 # Добавляем тест в CTest
 add_test(NAME MyTests COMMAND runTests)

@@ -17,11 +17,11 @@ public:
 
     Five(const size_t &n, unsigned char t = '0');
 
-    Five(const std::string& other);
+    Five(const std::string &other);
 
     Five(const Five &other);
 
-    Five(std::initializer_list<unsigned char> &other);
+    Five(const std::initializer_list<unsigned char> &other);
 
     Five(Five &&other) noexcept;
 
@@ -30,6 +30,8 @@ public:
     Five &operator=(Five &&other);
 
     size_t Size() const noexcept;
+
+    std::string toString() const;
 
     size_t Capacity() const noexcept;
 
@@ -45,6 +47,11 @@ public:
 
     bool operator==(const Five &other) const;
 
+    bool operator!=(const Five &other) const;
+
+    void push_back(unsigned char digit);
+
+    void push_front(unsigned char digit);
 
     virtual ~Five() noexcept;
 };

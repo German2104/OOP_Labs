@@ -12,6 +12,7 @@ _deps
 build
 CMakeUserPresets.json
 ./idea
+./.idea
 cmake-build-debug
 test_2_v1
 test_1_v0

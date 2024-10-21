@@ -1,7 +1,7 @@
-#include "../include/HexagonValidator.h"
+#include "../include/SquareValidator.h"
 
-void HexagonValidator::validate(std::vector<Point>& points) const {
-    if (points.size() != 6) {
+void SquareValidator::validate(std::vector<Point>& points) const {
+    if (points.size() != 4) {
         throw std::invalid_argument("Hexagon must have exactly 6 points.");
     }
 

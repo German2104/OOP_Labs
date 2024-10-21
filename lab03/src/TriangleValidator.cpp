@@ -1,7 +1,7 @@
-#include "../include/PentagonValidator.h"
+#include "../include/TriangleValidator.h"
 
-void PentagonValidator::validate(std::vector<Point>& points) const {
-    if (points.size() != 5) {
+void TriangleValidator::validate(std::vector<Point>& points) const {
+    if (points.size() != 3) {
         throw std::invalid_argument("Pentagon must have exactly 5 points.");
     }
 

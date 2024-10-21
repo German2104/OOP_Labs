@@ -1,6 +1,6 @@
 #include "../include/figure.h"
-#include "../include/pentagon.h"
-#include "../include/hexagon.h"
+#include "../include/square.h"
+#include "../include/triangle.h"
 #include "../include/octagon.h"
 
 Figure::Figure() {}
@@ -23,10 +23,10 @@ Figure::operator double() const {
 }
 
 Figure* Figure::createFigureWithPoints(const std::vector<Point>& points) {
-    if (points.size() == 5) {
-        return Pentagon::createPentagon(points);
-    } else if (points.size() == 6) {
-        return Hexagon::createHexagon(points);
+    if (points.size() == 3) {
+        return Triangle::createTriangle(points);
+    } else if (points.size() == 4) {
+        return Square::createSquare(points);
     } else if (points.size() == 8) {
         return Octagon::createOctagon(points);
     } else {

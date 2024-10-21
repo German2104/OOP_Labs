@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IFigureValidator.h"
-#include "PentagonValidator.h"
-#include "HexagonValidator.h"
+#include "TriangleValidator.h"
+#include "SquareValidator.h"
 #include "OctagonValidator.h"
 
 class FigureValidator {

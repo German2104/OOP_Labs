@@ -2,7 +2,7 @@
 
 #include "IFigureValidator.h"
 
-class PentagonValidator : public IFigureValidator {
+class SquareValidator : public IFigureValidator {
 public:
     void validate(std::vector<Point>& points) const override;
 };
